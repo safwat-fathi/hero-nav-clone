@@ -1,0 +1,27 @@
+@font-face {
+	font-family: FS Neruda;
+	font-weight: 300;
+	font-style: normal;
+	font-display: swap;
+	src: url(/assets/fs-neruda.woff2) format("woff2");
+}
+
+.hero-img {
+	/* opacity: 0; */
+	z-index: 1;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+	transform: translate(15%, 10%) scale(1.5);
+	transform-origin: top right;
+	transition: opacity 0.66s cubic-bezier(0.39, 0.575, 0.565, 1) 0.33s,
+		transform 0.5s cubic-bezier(0.075, 0.82, 0.165, 1) 0.33s;
+}
+
+#hero-text {
+	opacity: 0;
+	transform: translateY(20%);
+	transition: opacity .45s cubic-bezier(.39,.575,.565,1) .33s, transform .55s cubic-bezier(.165,.84,.44,1) .4s;
+}
