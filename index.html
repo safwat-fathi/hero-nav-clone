@@ -48,6 +48,8 @@
 					cubic-bezier(0.075, 0.82, 0.165, 1) 0.33s normal forwards;
 				--animate-scaleUp: scaleUp 1.25s cubic-bezier(0.215, 0.61, 0.355, 1)
 					0.2s normal forwards;
+				--animate-arrowSlideDown: slideDown .5s cubic-bezier(.445,.05,.55,.95) .22s normal forwards;
+				--animate-arrowFadeIn: fadeIn .75s cubic-bezier(.55,.055,.675,.19) 0s normal forwards;
 
 				@keyframes kenBurns {
 					0% {
@@ -109,6 +111,15 @@
 					}
 					100% {
 						transform: scaleX(1);
+					}
+				}
+
+				@keyframes slideDown {
+					0% {
+						transform: scaleY(.1) translateY(-50%);
+					}
+					100% {
+						transform: scaleY(1) translateY(0);
 					}
 				}
 			}
@@ -419,7 +430,7 @@
 				<!-- HERO arrow -->
 				<!-- todo: add animation -->
 				<div
-					class="self-end hidden md:block w-[7.46269%] ml-[1.49254%] order-2 lg:order-0 mb-[4.25em] opacity-100 transform scale-y-100 translate-y-[0] origin-[center_top] z-[2] transition-[opacity,transform] duration-[0.75s,0.5s] ease-[cubic-bezier(.55,.055,.675,.19), cubic-bezier(.445,.05,.55,.95)] delay-[0s,0.22s]"
+					class="[animation:var(--animate-arrowFadeIn),var(--animate-arrowSlideDown)] self-end hidden md:block w-[7.46269%] ml-[1.49254%] order-2 lg:order-0 mb-[4.25em] origin-[center_top] z-[2]"
 				>
 					<img src="./assets/home-hero-arrow.svg" alt="Arrow" />
 				</div>
