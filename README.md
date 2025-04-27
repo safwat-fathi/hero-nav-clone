@@ -10,3 +10,12 @@ This project is a pixel-perfect clone of the navigation bar and hero section fro
 - Build HTML structure
 - Difference between Desktop and mobile designs?
 - Is there reusable components?
+
+## Setup
+
+1. Clone or download this repo.
+2. Open `index.html` in any browser (no server needed).
+3. Resize your browser to test breakpoints:
+   - **Desktop** ≥ 1024px (navigation horizontally displayed)
+   - **Mobile** ≤ 425px (hamburger menu appears)
+4. All styling is inlined via TailwindCSS CDN.
