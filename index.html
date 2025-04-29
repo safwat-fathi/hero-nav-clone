@@ -132,6 +132,14 @@
 					@apply overflow-hidden;
 				}
 			}
+
+			/* disable scroll when mobile menu is open */
+			@layer utilities {
+				.header-scrolled {
+					@apply fixed bg-[#fcf9f7] border-b border-b-[#f4eeea] shadow-sm;
+					/* @apply transition-all duration-300 ease-in-out; */
+				}
+			}
 		</style>
 
 		<!-- AlpineJS for interactivity -->
@@ -145,7 +153,7 @@
 			id="scroll-trigger"
 			style="
 				position: absolute;
-				top: 100px;
+				top: 200px;
 				height: 1px;
 				width: 1px;
 				pointer-events: none;
@@ -157,7 +165,7 @@
 		></div>
 
 		<header
-			class="top-0 left-0 w-full bg-[#fcf9f7] min-[950px]:border-b min-[950px]:border-b-[#f4eeea] absolute p-[.5em_0_.35em] min-[950px]:pt-[2.5em] min-[950px]:pb-[1em] min-[950px]:bg-transparent border-none border-b-[1px] border-b-transparent z-10"
+			class="top-0 left-0 w-full bg-[#fcf9f7] min-[950px]:border-b min-[950px]:border-b-[#f4eeea] absolute p-[.5em_0_.35em] min-[950px]:pt-[2.5em] min-[950px]:pb-[1em] min-[950px]:bg-transparent border-none border-b-[1px] border-b-transparent z-10 transition-all duration-300 ease-in-out"
 		>
 			<div
 				class="max-w-[83.75em] mx-[1.25em] min-[768px]:mx-[2.5em] min-[880px]:mx-[3.125em] flex items-center justify-between"
@@ -548,11 +556,11 @@
 						if (!entry.isIntersecting) {
 							console.log("not intersecting");
 							
-							// header.classList.add("header-scrolled");
+							header.classList.add("header-scrolled");
 						} else {
 							console.log("intersecting");
 							// When the trigger IS intersecting (scrolled back up to it)
-							// header.classList.remove("header-scrolled");
+							header.classList.remove("header-scrolled");
 						}
 					});
 				};
