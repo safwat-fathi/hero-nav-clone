@@ -48,8 +48,10 @@
 					cubic-bezier(0.075, 0.82, 0.165, 1) 0.33s normal forwards;
 				--animate-scaleUp: scaleUp 1.25s cubic-bezier(0.215, 0.61, 0.355, 1)
 					0.2s normal forwards;
-				--animate-arrowSlideDown: slideDown .5s cubic-bezier(.445,.05,.55,.95) .22s normal forwards;
-				--animate-arrowFadeIn: fadeIn .75s cubic-bezier(.55,.055,.675,.19) 0s normal forwards;
+				--animate-arrowSlideDown: slideDown 0.5s
+					cubic-bezier(0.445, 0.05, 0.55, 0.95) 0.22s normal forwards;
+				--animate-arrowFadeIn: fadeIn 0.75s
+					cubic-bezier(0.55, 0.055, 0.675, 0.19) 0s normal forwards;
 
 				@keyframes kenBurns {
 					0% {
@@ -116,11 +118,18 @@
 
 				@keyframes slideDown {
 					0% {
-						transform: scaleY(.1) translateY(-50%);
+						transform: scaleY(0.1) translateY(-50%);
 					}
 					100% {
 						transform: scaleY(1) translateY(0);
 					}
+				}
+			}
+
+			/* disable scroll when mobile menu is open */
+			@layer utilities {
+				body:has(#menu-toggle:checked) {
+					@apply overflow-hidden;
 				}
 			}
 		</style>
@@ -129,13 +138,14 @@
 		<!-- <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script> -->
 	</head>
 	<body
+		style="height: 150vh"
 		class="selection:bg-primary selection:text-white text-[16px] min-[90em]:text-[1.102vw] font-montserrat overflow-x-hidden"
 	>
 		<header
-			class="top-0 left-0 w-full bg-[#fcf9f7] md:border-b md:border-b-[#f4eeea] absolute p-[.5em_0_.35em] md:pt-[2.5em] md:pb-[1em] md:bg-transparent border-none border-b-[1px] border-b-transparent z-10"
+			class="top-0 left-0 w-full bg-[#fcf9f7] min-[950px]:border-b min-[950px]:border-b-[#f4eeea] absolute p-[.5em_0_.35em] min-[950px]:pt-[2.5em] min-[950px]:pb-[1em] min-[950px]:bg-transparent border-none border-b-[1px] border-b-transparent z-10"
 		>
 			<div
-				class="max-w-[83.75em] mx-[1.25em] min-[1024px]:mx-[3.125em] flex items-center justify-between"
+				class="max-w-[83.75em] mx-[1.25em] min-[768px]:mx-[2.5em] min-[880px]:mx-[3.125em] flex items-center justify-between"
 			>
 				<a
 					href="/"
@@ -210,18 +220,10 @@
 					</span>
 				</a>
 
-				<!-- open menu button -->
-				<!-- <button
-					class="rounded-full bg-accent h-[3em] w-[3em] cursor-pointer flex flex-col items-center justify-center gap-1 md:hidden"
-				>
-					<span class="bg-white block h-[0.2em] w-1/2"></span>
-					<span class="bg-white block h-[0.2em] w-1/2"></span>
-					<span class="bg-white block h-[0.2em] w-1/2"></span>
-				</button> -->
 				<input id="menu-toggle" type="checkbox" class="peer hidden" />
 				<label
 					for="menu-toggle"
-					class="md:hidden flex flex-col items-center justify-center gap-1 h-[3em] w-[3em] rounded-full bg-accent cursor-pointer peer-checked:hidden"
+					class="mr-[1.49254%] mb-[0.15em] min-[950px]:hidden flex flex-col items-center justify-center gap-1 h-[2.5em] w-[2.5em] rounded-full bg-accent cursor-pointer peer-checked:hidden"
 				>
 					<span class="bg-white block h-[0.2em] w-1/2"></span>
 					<span class="bg-white block h-[0.2em] w-1/2"></span>
@@ -229,7 +231,7 @@
 				</label>
 
 				<nav
-					class="hidden md:flex items-center gap-4 text-[.85em] mr-[1.49254%]"
+					class="hidden min-[950px]:flex items-center gap-4 text-[.85em] mr-[1.49254%]"
 				>
 					<ul class="flex items-center gap-[3.25em] font-bold">
 						<li class="relative group">
@@ -315,7 +317,7 @@
 					<!-- close menu button -->
 					<label
 						for="menu-toggle"
-						class="h-[50px] w-[50px] cursor-pointer px-[6px] py-px appearance-none fixed top-[15px] right-[15px] z-30 md:hidden flex items-center justify-center"
+						class="h-[50px] w-[50px] cursor-pointer px-[6px] py-px appearance-none fixed top-[15px] right-[15px] z-30 min-[950px]:hidden flex items-center justify-center"
 					>
 						<svg
 							viewBox="0 0 22 22"
@@ -345,7 +347,7 @@
 					</label>
 
 					<ul class="font-bold flex flex-col items-center gap-6">
-						<li class="relative group flex flex-col items-center ">
+						<li class="relative group flex flex-col items-center">
 							<input id="dropdown-toggle" type="checkbox" class="peer hidden" />
 							<label
 								for="dropdown-toggle"
@@ -356,40 +358,40 @@
 
 							<!-- dropdown menu -->
 							<ul
-								class="hidden peer-checked:flex flex-col justify-center gap-2 items-center pt-[1em] transition-all duration-200 ease-in-out"
+								class="hidden text-[0.8em] peer-checked:flex flex-col justify-center gap-2 items-center mt-[0.5em] transition-all duration-200 ease-in-out"
 							>
 								<li class="whitespace-nowrap flex justify-center">
 									<a
 										href="/patios"
-										class="text-[0.6em] text-secondary uppercase relative tracking-[0.15em] after:content-[''] after:block after:w-0 hover:after:w-full after:h-[0.2em] after:bg-accent after:absolute after:top-[calc(100%+.3em)] after:left-0 after:transition-all after:duration-200 after:ease-in-out"
+										class="text-secondary uppercase relative tracking-[0.15em] after:content-[''] after:block after:w-0 hover:after:w-full after:h-[0.2em] after:bg-accent after:absolute after:top-[calc(100%+.3em)] after:left-0 after:transition-all after:duration-200 after:ease-in-out"
 										>Patios</a
 									>
 								</li>
 								<li class="whitespace-nowrap flex justify-center">
 									<a
 										href="/swimming-pools"
-										class="text-[0.6em] text-secondary uppercase relative tracking-[0.15em] after:content-[''] after:block after:w-0 hover:after:w-full after:h-[0.2em] after:bg-accent after:absolute after:top-[calc(100%+.3em)] after:left-0 after:transition-all after:duration-200 after:ease-in-out"
+										class="text-secondary uppercase relative tracking-[0.15em] after:content-[''] after:block after:w-0 hover:after:w-full after:h-[0.2em] after:bg-accent after:absolute after:top-[calc(100%+.3em)] after:left-0 after:transition-all after:duration-200 after:ease-in-out"
 										>Swimming Pools</a
 									>
 								</li>
 								<li class="whitespace-nowrap flex justify-center">
 									<a
 										href="/landscaping"
-										class="text-[0.6em] text-secondary uppercase relative tracking-[0.15em] after:content-[''] after:block after:w-0 hover:after:w-full after:h-[0.2em] after:bg-accent after:absolute after:top-[calc(100%+.3em)] after:left-0 after:transition-all after:duration-200 after:ease-in-out"
+										class="text-secondary uppercase relative tracking-[0.15em] after:content-[''] after:block after:w-0 hover:after:w-full after:h-[0.2em] after:bg-accent after:absolute after:top-[calc(100%+.3em)] after:left-0 after:transition-all after:duration-200 after:ease-in-out"
 										>decks</a
 									>
 								</li>
 								<li class="whitespace-nowrap flex justify-center">
 									<a
 										href="/outdoor-kitchens"
-										class="text-[0.6em] text-secondary uppercase relative tracking-[0.15em] after:content-[''] after:block after:w-0 hover:after:w-full after:h-[0.2em] after:bg-accent after:absolute after:top-[calc(100%+.3em)] after:left-0 after:transition-all after:duration-200 after:ease-in-out"
+										class="text-secondary uppercase relative tracking-[0.15em] after:content-[''] after:block after:w-0 hover:after:w-full after:h-[0.2em] after:bg-accent after:absolute after:top-[calc(100%+.3em)] after:left-0 after:transition-all after:duration-200 after:ease-in-out"
 										>outdoor kitchens</a
 									>
 								</li>
 								<li class="whitespace-nowrap flex justify-center">
 									<a
 										href="/outdoor-fireplaces"
-										class="text-[0.6em] text-secondary uppercase relative tracking-[0.15em] after:content-[''] after:block after:w-0 hover:after:w-full after:h-[0.2em] after:bg-accent after:absolute after:top-[calc(100%+.3em)] after:left-0 after:transition-all after:duration-200 after:ease-in-out"
+										class="text-secondary uppercase relative tracking-[0.15em] after:content-[''] after:block after:w-0 hover:after:w-full after:h-[0.2em] after:bg-accent after:absolute after:top-[calc(100%+.3em)] after:left-0 after:transition-all after:duration-200 after:ease-in-out"
 										>outdoor fireplaces</a
 									>
 								</li>
@@ -428,7 +430,6 @@
 		<section aria-label="Hero" class="relative bg-[#fcf9f7]">
 			<div class="max-w-[83.75em] mx-[3.125em] flex flex-wrap">
 				<!-- HERO arrow -->
-				<!-- todo: add animation -->
 				<div
 					class="[animation:var(--animate-arrowFadeIn),var(--animate-arrowSlideDown)] self-end hidden md:block w-[7.46269%] ml-[1.49254%] order-2 lg:order-0 mb-[4.25em] origin-[center_top] z-[2]"
 				>
@@ -457,9 +458,11 @@
 
 				<!-- Text -->
 				<div
-					class="[animation:var(--animate-heroText-fadeIn),var(--animate-slideUp)] w-full max-w-[17.5em] min-[1024px]:w-[55.22388%] min-[1024px]:max-w-[31.25em] m-[10em_auto_3em] min-[1024px]:mt-[8em] min-[1024px]:mb-[4.25em] block bg-white z-[5] relative lg:ml-0 rounded-[.125em] shadow-[-2.5em_3.125em_5.25em_rgba(0,0,0,.1)]"
+					class="[animation:var(--animate-heroText-fadeIn),var(--animate-slideUp)] w-full max-w-[17.5em] min-[1024px]:w-[55.22388%] min-[768px]:max-w-[23.5em] min-[1024px]:max-w-[31.25em] m-[10em_auto_3em] min-[1024px]:mt-[8em] min-[1024px]:mb-[4.25em] block bg-white z-[5] relative min-[768px]:ml-0 rounded-[.125em] shadow-[-2.5em_3.125em_5.25em_rgba(0,0,0,.1)]"
 				>
-					<div class="p-[2em] min-[1024px]:p-[3.625em_3.625em_2.84375em_5.5em]">
+					<div
+						class="p-[2em] min-[768px]:p-[2.5em_3.75em] min-[1024px]:p-[3.625em_3.625em_2.84375em_5.5em]"
+					>
 						<!-- blue ARROW -->
 						<div
 							class="max-w-[14.375em] transform rotate-[143deg] hidden md:block absolute w-[33vw] h-[.0625em] lg:top-[2em] top-[8em] right-[-10em] before:z-[2] pointer-events-none bg-[#5a90f1] before:block before:content-[''] before:top-0 before:left-0 before:right-0 before:bottom-0 before:absolute before:origin-[center_left] animate-scaleUp"
