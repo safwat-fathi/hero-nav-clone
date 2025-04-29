@@ -141,6 +141,21 @@
 		style="height: 150vh"
 		class="selection:bg-primary selection:text-white text-[16px] min-[90em]:text-[1.102vw] font-montserrat overflow-x-hidden"
 	>
+		<div
+			id="scroll-trigger"
+			style="
+				position: absolute;
+				top: 100px;
+				height: 1px;
+				width: 1px;
+				pointer-events: none;
+				opacity: 0;
+				z-index: -1;
+				visibility: hidden;
+				user-select: none;
+			"
+		></div>
+
 		<header
 			class="top-0 left-0 w-full bg-[#fcf9f7] min-[950px]:border-b min-[950px]:border-b-[#f4eeea] absolute p-[.5em_0_.35em] min-[950px]:pt-[2.5em] min-[950px]:pb-[1em] min-[950px]:bg-transparent border-none border-b-[1px] border-b-transparent z-10"
 		>
@@ -472,7 +487,7 @@
 						<div>
 							<div>
 								<h1
-									class="antialiased font-neruda text-[#40403a] text-[2.75em] md:text-[3.75em] lg:text-[5.15em] leading-[.853658537] tracking-[.021341463em] mb-[.5em]"
+									class="antialiased font-neruda font-light text-[#40403a] text-[2.75em] md:text-[3.75em] lg:text-[5.15em] leading-[.853658537] tracking-[.021341463em] mb-[.5em]"
 								>
 									The best memories are made outdoors
 								</h1>
@@ -510,5 +525,46 @@
 				</div>
 			</div>
 		</section>
+
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				const header = document.querySelector("header");
+				const scrollTrigger = document.getElementById("scroll-trigger");
+
+				if (!header || !scrollTrigger) {
+					console.error("Header or scroll trigger element not found.");
+					return;
+				}
+
+				const observerOptions = {
+					root: null, // Use the viewport as the root
+					rootMargin: "0px",
+					threshold: 0, // Trigger as soon as the element enters/leaves the viewport edge
+				};
+
+				const observerCallback = entries => {
+					entries.forEach(entry => {
+						// When the trigger is NOT intersecting (scrolled past it)
+						if (!entry.isIntersecting) {
+							console.log("not intersecting");
+							
+							// header.classList.add("header-scrolled");
+						} else {
+							console.log("intersecting");
+							// When the trigger IS intersecting (scrolled back up to it)
+							// header.classList.remove("header-scrolled");
+						}
+					});
+				};
+
+				const observer = new IntersectionObserver(
+					observerCallback,
+					observerOptions
+				);
+
+				// Start observing the trigger element
+				observer.observe(scrollTrigger);
+			});
+		</script>
 	</body>
 </html>
